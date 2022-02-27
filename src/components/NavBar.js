@@ -18,6 +18,8 @@ import NewQuestion from './NewQuestion';
 import PollView from './PollView';
 import LeaderBoard from './LeaderBoard';
 
+import { connect } from 'react-redux'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

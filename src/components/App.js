@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import React, { Component } from 'react'
 import NavBar from './NavBar'
 import LoginView from './LoginView'
@@ -9,19 +10,22 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
 
-  state = {
-    authedUser: false
-  }
   render() {
     return (
-      <div>
-        {this.state.authedUser === true
-          ? <NavBar/>
-          : <LoginView/>
-        }
-      </div>
+        <div>
+          {this.props.isLoggedIn
+            ? <LoginView/>
+            : <NavBar/>
+          }
+        </div>
     );
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ authedUser }) {
+  return {
+    isLoggedIn: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App)
