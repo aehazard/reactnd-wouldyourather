@@ -12,12 +12,19 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 
-export default function MediaControlCard() {
+export default function MediaControlCard(props) {
   const theme = useTheme();
+
+  const { user, question } = props
+
+  function getDate(timestamp) {
+    const date = new Date(timestamp)
+    return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+  }
 
   return (
     <Card sx={{ display: 'flex' }}>
-      <Avatar sx={{ width: 100, height: 100, margin: 2}} alt="Nathan" src="https://media.istockphoto.com/photos/background-of-galaxy-and-stars-picture-id1035676256?b=1&k=20&m=1035676256&s=170667a&w=0&h=NOtiiFfDhhUhZgQ4wZmHPXxHvt3RFVD-lTmnWCeyIG4="/>
+      <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={user.name} src={user.avatarURL}/>
       <Divider orientation="vertical" flexItem />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
@@ -25,10 +32,16 @@ export default function MediaControlCard() {
             Would you rather...
           </Typography>
           <Typography component="div" variant="h6">
-            This is a Question!
+            {question.optionOne.text}
           </Typography>
           <Typography variant="body2" color="text.secondary" component="div">
-            submitted by So-and-so on MM/DD/YYYY
+            or...
+          </Typography>
+          <Typography component="div" variant="h6">
+            {question.optionTwo.text}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" component="div">
+            submitted by {user.name} on {getDate(question.timestamp)}
           </Typography>
         </CardContent>
       </Box>
