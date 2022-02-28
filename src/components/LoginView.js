@@ -5,7 +5,7 @@ import { setAuthUser } from '../actions/authedUser'
 
 class LoginView extends Component {
   state = {
-    userId: '',
+    userId: null,
     username: ''
   }
 

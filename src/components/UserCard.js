@@ -13,7 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 
 export default function MediaControlCard(props) {
-  const theme = useTheme();
+  //const theme = useTheme();
 
   const { user, question } = props
 
@@ -28,19 +28,10 @@ export default function MediaControlCard(props) {
       <Divider orientation="vertical" flexItem />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography variant="body2" color="text.secondary" component="div">
-            Would you rather...
+          <Typography variant='h6' paragraph={true}>
+            Would you rather {question.optionOne.text} or {question.optionTwo.text}?
           </Typography>
-          <Typography component="div" variant="h6">
-            {question.optionOne.text}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" component="div">
-            or...
-          </Typography>
-          <Typography component="div" variant="h6">
-            {question.optionTwo.text}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" component="div">
+          <Typography variant='body2' paragraph={true}>
             submitted by {user.name} on {getDate(question.timestamp)}
           </Typography>
         </CardContent>

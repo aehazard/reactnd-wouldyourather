@@ -11,6 +11,7 @@ import { deepOrange, deepPurple } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
 
 import UserCard from './UserCard';
 import QuestionList from './QuestionList';
@@ -19,6 +20,7 @@ import PollView from './PollView';
 import LeaderBoard from './LeaderBoard';
 
 import { connect } from 'react-redux'
+import { setAuthUser } from '../actions/authedUser'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -32,9 +34,11 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+        <Container>
+            <Box>
+                {children}
+            </Box>
+        </Container>
       )}
     </div>
   );
@@ -53,16 +57,22 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+function NavBar(props) {
   const [value, setValue] = React.useState(0);
+
+  const { user } = props
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  function logout() {
+    props.dispatch(setAuthUser(null))
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: 10}}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Home" {...a11yProps(0)} />
           <Tab label="New Question" {...a11yProps(1)} />
@@ -70,27 +80,33 @@ export default function BasicTabs() {
           <Tab label="Answer Poll*" {...a11yProps(3)} />
           <Tab label="Poll Results*" {...a11yProps(4)} />
           <Box sx={{width: '100%', display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap', alignContent: 'center'}}>
-            <Avatar sx={{ bgcolor: deepPurple[500], height: '30.75px', width: '30.75px', margin: '0px 16px'}}>N</Avatar>
-            <Box sx={{display: 'flex', alignContent: 'center', flexWrap: 'wrap', mr: '16px'}}><Typography variant="body2">Welcome Nathan!</Typography></Box>
-            <Button variant='contained' size='small' sx={{margin: '0px 16px'}}>Logout</Button>
+            <Avatar sx={{ bgcolor: deepPurple[500], height: '30.75px', width: '30.75px', margin: '0px 16px'}} alt={user.name} src={user.avatarURL}>N</Avatar>
+            <Box sx={{display: 'flex', alignContent: 'center', flexWrap: 'wrap', mr: '16px'}}><Typography variant="body2">Welcome {props.user.name}!</Typography></Box>
+            <Button onClick={logout} variant='contained' size='small' sx={{margin: '0px 16px'}}>Logout</Button>
           </Box>
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <QuestionList />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <NewQuestion />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <LeaderBoard/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <PollView answered={0}/>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <PollView answered={1}/>
-      </TabPanel>
+        <TabPanel value={value} index={0}>
+          <QuestionList />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <NewQuestion />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <LeaderBoard/>
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <PollView answered={0}/>
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <PollView answered={1}/>
+        </TabPanel>
     </Box>
   );
 }
+
+function mapStateToProps( {authedUser, users} ){
+  return { user: users[authedUser] };
+}
+
+export default connect(mapStateToProps)(NavBar)
