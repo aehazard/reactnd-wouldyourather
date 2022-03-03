@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NavBar from './NavBar'
+import TabNav from './TabNav'
 import LoginView from './LoginView'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
@@ -14,7 +14,7 @@ class App extends Component {
         <div>
           {this.props.isLoggedIn
             ? <LoginView/>
-            : <NavBar/>
+            : <TabNav/>
           }
         </div>
     );

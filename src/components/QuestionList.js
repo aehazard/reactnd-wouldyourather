@@ -10,7 +10,6 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import UserCard from './UserCard';
 import AppBar from '@mui/material/AppBar';
-import NavBar from './NavBar'
 import Paper from '@mui/material/Paper';
 
 import { connect } from 'react-redux';
