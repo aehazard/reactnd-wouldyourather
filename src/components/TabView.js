@@ -15,7 +15,7 @@ import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 
 import UserCard from './UserCard';
-import QuestionList from './QuestionList';
+import QuestionsView from './QuestionsView';
 import NewQuestion from './NewQuestion';
 import PollView from './PollView';
 import LeaderBoard from './LeaderBoard';
@@ -27,7 +27,7 @@ class TabView extends Component {
 
   handleChange = (event, newValue) => {
     event.preventDefault()
-    const newRoute = (newValue === "home") ? "/" : `/${newValue}`
+    const newRoute = (newValue === 'questions') ? '/' : `/${newValue}`
     this.props.history.push(newRoute)
   };
 
@@ -35,24 +35,24 @@ class TabView extends Component {
     this.props.dispatch(setAuthUser(null))
   }
 
-  tabPanel(value) {
-    switch (value) {
-      case 'home': return <QuestionList/>;
+  tabPanel(view) {
+    switch (view) {
+      case 'questions': return <QuestionsView/>;
       case 'add': return <NewQuestion/>;
       case 'leaderboard': return <LeaderBoard/>;
-      default: return <QuestionList/>
+      case 'poll': return <PollView/>;
+      default: return <QuestionsView/>
     }
   }
 
   render() {
-    console.log(`Props value of TabView is ${this.props.value}`)
-    const { user } = this.props
-    const tabPanel = this.tabPanel(this.props.value)
+    console.log(`TabView Rendering with tabVisible "${this.props.tabVisible}" and view "${this.props.view}"`)
+    const { user, view, tabVisible } = this.props
     return (
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: 10}}>
-          <Tabs value={this.props.value} onChange={this.handleChange} aria-label="basic tabs example">
-            <Tab label="Home" value="home" />
+          <Tabs value={tabVisible} onChange={this.handleChange} aria-label="basic tabs example">
+            <Tab label="Questions" value="questions" />
             <Tab label="New Question" value= "add"/>
             <Tab label="Leader Board" value="leaderboard" />
             <Box sx={{width: '100%', display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap', alignContent: 'center'}}>
@@ -64,7 +64,7 @@ class TabView extends Component {
         </Box>
         <Container>
           <Box>
-            {tabPanel}
+            {this.tabPanel(view)}
           </Box>
         </Container>
       </Box>

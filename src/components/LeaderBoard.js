@@ -24,6 +24,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function LeaderBoard(props) {
+  console.log("LeaderBoard rendering")
+  
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {

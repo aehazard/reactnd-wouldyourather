@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import UserCard from './UserCard';
 import AppBar from '@mui/material/AppBar';
 import Paper from '@mui/material/Paper';
+import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux';
 
@@ -52,7 +53,6 @@ class QuestionList extends Component {
   render () {
     const { questionIds, questions, users, authedUser } = this.props
     return (
-      <Box sx={{display: 'flex', justifyContent: 'center'}}>
         <Paper name='Question List' sx={{width:'50%'}}>
           <AppBar position="static" sx={{elevation:'0'}}>
             <Tabs
@@ -77,14 +77,12 @@ class QuestionList extends Component {
             {this.filteredQuestions(this.state.value).map((id) => (
               <UserCard
                 key={id}
-                question={questions[id]}
-                user={users[questions[id].author]}
+                qid={id}
               />
             ))}
             </Stack>
           </Box>
         </Paper>
-      </Box>
     );
   }
 }
@@ -93,4 +91,4 @@ function mapStateToProps( {questions, users, authedUser} ){
   return { questionIds: Object.keys(questions), questions, users, authedUser };
 }
 
-export default connect(mapStateToProps)(QuestionList)
+export default withRouter(connect(mapStateToProps)(QuestionList))

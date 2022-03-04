@@ -15,7 +15,7 @@ import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 
 import UserCard from './UserCard';
-import QuestionList from './QuestionList';
+import QuestionsView from './QuestionsView';
 import NewQuestion from './NewQuestion';
 import PollView from './PollView';
 import LeaderBoard from './LeaderBoard';
@@ -26,16 +26,15 @@ import { setAuthUser } from '../actions/authedUser'
 
 class TabNav extends Component {
 
-  logout = () => {
-    this.props.dispatch(setAuthUser(null))
-  }
   render() {
+    console.log("TabNav rendering")
     return (
       <Router>
         <Box sx={{ width: '100%' }}>
-          <Route path='/' exact render={() => <TabView value={"home"}/>}/>
-          <Route path='/leaderboard' exact render={() => <TabView value={"leaderboard"}/>}/>
-          <Route path='/add' exact render={() => <TabView value={"add"}/>}/>
+          <Route path='/' exact render={() => <TabView tabVisible={"questions"} view={"questions"}/>}/>
+          <Route path='/leaderboard' render={() => <TabView tabVisible={"leaderboard"} view={"leaderboard"}/>}/>
+          <Route path='/add' render={() => <TabView tabVisible={"add"} view={"add"}/>}/>
+          <Route path='/questions' render={() => <TabView tabVisible={"questions"} view={"poll"}/>}/>
         </Box>
       </Router>
     )

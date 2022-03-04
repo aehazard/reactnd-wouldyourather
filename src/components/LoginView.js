@@ -23,6 +23,7 @@ class LoginView extends Component {
   }
 
   render () {
+    console.log("LoginView rendering")
     return (
       <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignContent: 'center', minHeight:'400px'}}>
         <Paper sx={{width:'50%', padding:2}}>

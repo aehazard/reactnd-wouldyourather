@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TextField, Paper, Button, Box, Stack, Typography } from '@mui/material';
 
 export default function NewQuestion() {
+  console.log("NewQuestion rendering")
   return (
     <Box sx={{display: 'flex', justifyContent: 'center'}}>
       <Paper sx={{width:'50%', padding:2}}>

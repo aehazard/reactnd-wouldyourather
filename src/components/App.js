@@ -10,6 +10,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("App rendering")
     return (
         <div>
           {this.props.isLoggedIn

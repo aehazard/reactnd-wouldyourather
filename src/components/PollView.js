@@ -16,23 +16,32 @@ import {
   Divider,
   Typography
 } from '@mui/material';
+import { handleSubmitAnswer } from '../actions/questions'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
 
-function AnsweringMode() {
+function getQID (location) {
+  const regex = /(?<=:).*/
+  return location.match(regex)[0]
+}
+
+function AnsweringMode(props) {
+  const { qid, question, authedUser, author } = props
+  console.log(`Show unanswered question, id: ${qid}`)
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center'}}>
       <Paper sx={{width: '50%', padding:2}}>
         <Box sx={{ width:'100%'}}>
           <Stack direction='row'>
-            <Avatar sx={{ width: 100, height: 100, margin: 2}} alt="Nathan" src="https://media.istockphoto.com/photos/background-of-galaxy-and-stars-picture-id1035676256?b=1&k=20&m=1035676256&s=170667a&w=0&h=NOtiiFfDhhUhZgQ4wZmHPXxHvt3RFVD-lTmnWCeyIG4="/>
+            <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={author.name} src={author.avatarURL}/>
             <FormControl component="fieldset" sx={{width:'auto', margin:2}}>
               <FormLabel component="legend">Would you rather...</FormLabel>
               <RadioGroup
-                aria-label="gender"
-                defaultValue="female"
+                aria-label="question"
+                defaultValue="optionOne"
                 name="radio-buttons-group"
               >
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                <FormControlLabel value="optionOne" control={<Radio />} label={question.optionOne} />
+                <FormControlLabel value="optionTwo" control={<Radio />} label={question.optionTwo} />
               </RadioGroup>
             </FormControl>
           </Stack>
@@ -42,24 +51,24 @@ function AnsweringMode() {
           <Button variant='outlined' size='small'>Cancel</Button>
         </Stack>
       </Paper>
-    </Box>
   )
 }
 
-function ResultsMode() {
+function ResultsMode(props) {
+  const { qid, question, authedUser, author } = props
+  console.log(`Show answered question, id: ${qid}`)
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center'}}>
       <Paper sx={{width: '50%', padding:2}}>
         <Box sx={{ width:'100%'}}>
           <Stack direction='row'>
-            <Avatar sx={{ width: 100, height: 100, margin: 2}} alt="Nathan" src="https://media.istockphoto.com/photos/background-of-galaxy-and-stars-picture-id1035676256?b=1&k=20&m=1035676256&s=170667a&w=0&h=NOtiiFfDhhUhZgQ4wZmHPXxHvt3RFVD-lTmnWCeyIG4="/>
+            <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={author.name} src={author.avatarURL}/>
             <Box sx={{width:'auto', margin:2}}>
               <Typography variant="overline" color="text.secondary" component="span" display='block'>Results so far:</Typography>
               <Stack direction="row" spacing={2}  sx={{display: 'flex', justifyContent: 'space-around', width:'100%'}}>
-                <Typography variant="h4" color="text.secondary" component="span">40%</Typography>
-                <Typography variant="body2" color="text.secondary" component="span">Would rather option 1</Typography>
-                <Typography variant="h4" color="text.secondary" component="span">60%</Typography>
-                <Typography variant="body2" color="text.secondary" component="span">Would rather option 2</Typography>
+                <Typography variant="h4" color="text.secondary" component="span">{question.optionOne.votes.length}</Typography>
+                <Typography variant="body2" color="text.secondary" component="span">{question.optionOne.text}</Typography>
+                <Typography variant="h4" color="text.secondary" component="span">{question.optionOne.votes.length}</Typography>
+                <Typography variant="body2" color="text.secondary" component="span">{question.optionOne.text}</Typography>
               </Stack>
             </Box>
           </Stack>
@@ -69,15 +78,26 @@ function ResultsMode() {
           <Button variant='outlined' size='small'>Cancel</Button>
         </Stack>
       </Paper>
-    </Box>
   )
 }
 
-export default function PollView(props) {
-  const { answered } = props
+function PollView(props) {
+  console.log("PollView rendering")
+  const { authedUser,  questions, users } = props
+  const qid = getQID(this.props.location.pathname)
+  const question = questions[qid]
+  const answered = ( question.optionOne.includes(authedUser) || question.optionOne.includes(authedUser) )
+  const author = users[question.author]
+  const propsToSend = { qid, question, authedUser, author }
   if (answered) {
-    return(<ResultsMode/>)
+    return(<ResultsMode {...propsToSend}/>)
   } else {
-    return(<AnsweringMode/>)
+    return(<AnsweringMode {...propsToSend}/>)
   }
 }
+
+function mapStateToProps( {authedUser, questions, users} ){
+  return { authedUser,  questions, users };
+}
+
+export default withRouter(connect(mapStateToProps)(PollView))
