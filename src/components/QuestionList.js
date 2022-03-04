@@ -33,11 +33,11 @@ class QuestionList extends Component {
     const thisUserAnswers = Object.keys(users[authedUser].answers)
     if (value === 0) {
       return questionIds.filter((id) => (
-        thisUserAnswers.includes(id)
+        !thisUserAnswers.includes(id)
       ))
     } else {
       return questionIds.filter((id) => (
-        !thisUserAnswers.includes(id)
+        thisUserAnswers.includes(id)
       ))
     }
   }
