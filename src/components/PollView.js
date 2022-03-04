@@ -40,8 +40,8 @@ function AnsweringMode(props) {
                 defaultValue="optionOne"
                 name="radio-buttons-group"
               >
-                <FormControlLabel value="optionOne" control={<Radio />} label={question.optionOne} />
-                <FormControlLabel value="optionTwo" control={<Radio />} label={question.optionTwo} />
+                <FormControlLabel value="optionOne" control={<Radio />} label={question.optionOne.text} />
+                <FormControlLabel value="optionTwo" control={<Radio />} label={question.optionTwo.text} />
               </RadioGroup>
             </FormControl>
           </Stack>
@@ -67,8 +67,8 @@ function ResultsMode(props) {
               <Stack direction="row" spacing={2}  sx={{display: 'flex', justifyContent: 'space-around', width:'100%'}}>
                 <Typography variant="h4" color="text.secondary" component="span">{question.optionOne.votes.length}</Typography>
                 <Typography variant="body2" color="text.secondary" component="span">{question.optionOne.text}</Typography>
-                <Typography variant="h4" color="text.secondary" component="span">{question.optionOne.votes.length}</Typography>
-                <Typography variant="body2" color="text.secondary" component="span">{question.optionOne.text}</Typography>
+                <Typography variant="h4" color="text.secondary" component="span">{question.optionTwo.votes.length}</Typography>
+                <Typography variant="body2" color="text.secondary" component="span">{question.optionTwo.text}</Typography>
               </Stack>
             </Box>
           </Stack>
@@ -84,9 +84,10 @@ function ResultsMode(props) {
 function PollView(props) {
   console.log("PollView rendering")
   const { authedUser,  questions, users } = props
-  const qid = getQID(this.props.location.pathname)
+  const qid = getQID(props.location.pathname)
   const question = questions[qid]
-  const answered = ( question.optionOne.includes(authedUser) || question.optionOne.includes(authedUser) )
+  console.log(question)
+  const answered = ( question.optionOne.votes.includes(authedUser) || question.optionOne.votes.includes(authedUser) )
   const author = users[question.author]
   const propsToSend = { qid, question, authedUser, author }
   if (answered) {
