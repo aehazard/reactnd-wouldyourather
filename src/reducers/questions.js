@@ -9,8 +9,6 @@ export default function questions (state = {}, action) {
       }
 
     case SUBMIT_ANSWER :
-      console.log(state)
-      console.log(action)
       return {
         ...state,
         [action.qid]: {

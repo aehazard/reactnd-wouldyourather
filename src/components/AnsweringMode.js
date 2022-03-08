@@ -16,7 +16,7 @@ import {
   Divider,
   Typography
 } from '@mui/material';
-import { handleSubmitAnswer } from '../actions/questions'
+import { handleSubmitAnswer } from '../actions/shared'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
 

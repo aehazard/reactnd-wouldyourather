@@ -10,19 +10,11 @@ export function receiveQuestions (questions) {
   }
 }
 
-function submitAnswer({ authedUser, qid, answer }) {
+export function submitAnswer({ authedUser, qid, answer }) {
   return {
     type: SUBMIT_ANSWER,
     authedUser,
     qid,
     answer
-  }
-}
-
-export function handleSubmitAnswer (info) {
-  return (dispatch) => {
-    dispatch(submitAnswer(info))
-
-    return saveQuestionAnswer(info)
   }
 }

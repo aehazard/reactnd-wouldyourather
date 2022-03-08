@@ -1,6 +1,6 @@
-import { getInitialData } from '../utils/api'
-import { receiveUsers } from '../actions/users'
-import { receiveQuestions } from '../actions/questions'
+import { getInitialData, saveQuestionAnswer } from '../utils/api'
+import { receiveUsers, updateUserAnswers } from '../actions/users'
+import { receiveQuestions, submitAnswer } from '../actions/questions'
 
 export function handleInitialData () {
   return (dispatch) => {
@@ -8,6 +8,17 @@ export function handleInitialData () {
       .then(({ users, questions}) => {
         dispatch(receiveUsers(users))
         dispatch(receiveQuestions(questions))
+      })
+  }
+}
+
+
+export function handleSubmitAnswer (info) {
+  return (dispatch) => {
+    return saveQuestionAnswer(info)
+      .then(() => {
+        dispatch(submitAnswer(info))
+        dispatch(updateUserAnswers(info))
       })
   }
 }
