@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react'
 import {
   TextField,
   Paper,
@@ -19,39 +19,11 @@ import {
 import { handleSubmitAnswer } from '../actions/questions'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
+import AnsweringMode from "./AnsweringMode"
 
 function getQID (location) {
   const regex = /(?<=:).*/
   return location.match(regex)[0]
-}
-
-function AnsweringMode(props) {
-  const { qid, question, authedUser, author } = props
-  console.log(`Show unanswered question, id: ${qid}`)
-  return (
-      <Paper sx={{width: '50%', padding:2}}>
-        <Box sx={{ width:'100%'}}>
-          <Stack direction='row'>
-            <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={author.name} src={author.avatarURL}/>
-            <FormControl component="fieldset" sx={{width:'auto', margin:2}}>
-              <FormLabel component="legend">Would you rather...</FormLabel>
-              <RadioGroup
-                aria-label="question"
-                defaultValue="optionOne"
-                name="radio-buttons-group"
-              >
-                <FormControlLabel value="optionOne" control={<Radio />} label={question.optionOne.text} />
-                <FormControlLabel value="optionTwo" control={<Radio />} label={question.optionTwo.text} />
-              </RadioGroup>
-            </FormControl>
-          </Stack>
-        </Box>
-        <Stack direction="row" spacing={2}  sx={{mt: '16px', display: 'flex', justifyContent: 'flex-end'}}>
-          <Button variant='contained' size='small'>Submit</Button>
-          <Button variant='outlined' size='small'>Cancel</Button>
-        </Stack>
-      </Paper>
-  )
 }
 
 function ResultsMode(props) {
@@ -82,6 +54,7 @@ function ResultsMode(props) {
 }
 
 function PollView(props) {
+
   console.log("PollView rendering")
   const { authedUser,  questions, users } = props
   const qid = getQID(props.location.pathname)

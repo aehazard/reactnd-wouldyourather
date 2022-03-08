@@ -9,16 +9,19 @@ export default function questions (state = {}, action) {
       }
 
     case SUBMIT_ANSWER :
+      console.log(state)
+      console.log(action)
       return {
         ...state,
         [action.qid]: {
-          ...state,
+          ...state[action.qid],
           [action.answer]: {
-            votes: state[action.answer].concat(action.authedUser)
+            ...state[action.qid][action.answer],
+            votes: state[action.qid][action.answer].votes.concat([action.authedUser])
           }
         }
-      }
 
+      }
     default : return state
   }
 }
