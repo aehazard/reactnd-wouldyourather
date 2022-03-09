@@ -47,6 +47,11 @@ class AnsweringMode extends Component {
     }))
   }
 
+  handleCancel = (event) => {
+    event.preventDefault()
+    this.props.history.push('/')
+  }
+
   render(){
     const { qid, question, authedUser, author, handleSubmit } = this.props
     console.log(`Show unanswered question, id: ${qid}`)
@@ -71,11 +76,11 @@ class AnsweringMode extends Component {
           </Box>
           <Stack direction="row" spacing={2}  sx={{mt: '16px', display: 'flex', justifyContent: 'flex-end'}}>
             <Button variant='contained' size='small' onClick={this.handleSubmit}>Submit</Button>
-            <Button variant='outlined' size='small'>Cancel</Button>
+            <Button variant='outlined' size='small' onClick={this.handleCancel}>Cancel</Button>
           </Stack>
         </Paper>
     )
   }
 }
 
-export default connect()(AnsweringMode)
+export default withRouter(connect()(AnsweringMode))

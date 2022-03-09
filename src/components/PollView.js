@@ -20,37 +20,11 @@ import { handleSubmitAnswer } from '../actions/questions'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
 import AnsweringMode from "./AnsweringMode"
+import ResultsMode from './ResultsMode'
 
 function getQID (location) {
   const regex = /(?<=:).*/
   return location.match(regex)[0]
-}
-
-function ResultsMode(props) {
-  const { qid, question, authedUser, author } = props
-  console.log(`Show answered question, id: ${qid}`)
-  return (
-      <Paper sx={{width: '50%', padding:2}}>
-        <Box sx={{ width:'100%'}}>
-          <Stack direction='row'>
-            <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={author.name} src={author.avatarURL}/>
-            <Box sx={{width:'auto', margin:2}}>
-              <Typography variant="overline" color="text.secondary" component="span" display='block'>Results so far:</Typography>
-              <Stack direction="row" spacing={2}  sx={{display: 'flex', justifyContent: 'space-around', width:'100%'}}>
-                <Typography variant="h4" color="text.secondary" component="span">{question.optionOne.votes.length}</Typography>
-                <Typography variant="body2" color="text.secondary" component="span">{question.optionOne.text}</Typography>
-                <Typography variant="h4" color="text.secondary" component="span">{question.optionTwo.votes.length}</Typography>
-                <Typography variant="body2" color="text.secondary" component="span">{question.optionTwo.text}</Typography>
-              </Stack>
-            </Box>
-          </Stack>
-        </Box>
-        <Stack direction="row" spacing={2}  sx={{mt: '16px', display: 'flex', justifyContent: 'flex-end'}}>
-          <Button variant='contained' size='small'>Submit</Button>
-          <Button variant='outlined' size='small'>Cancel</Button>
-        </Stack>
-      </Paper>
-  )
 }
 
 function PollView(props) {
@@ -61,6 +35,7 @@ function PollView(props) {
   const question = questions[qid]
   console.log(question)
   const answered = ( question.optionOne.votes.includes(authedUser) || question.optionOne.votes.includes(authedUser) )
+
   const author = users[question.author]
   const propsToSend = { qid, question, authedUser, author }
   if (answered) {
