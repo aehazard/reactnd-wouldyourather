@@ -45,6 +45,8 @@ class AnsweringMode extends Component {
       qid,
       answer
     }))
+
+    this.props.history.push('/')
   }
 
   handleCancel = (event) => {

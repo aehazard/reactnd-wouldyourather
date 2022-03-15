@@ -53,7 +53,7 @@ class QuestionList extends Component {
   render () {
     const { questionIds, questions, users, authedUser } = this.props
     return (
-        <Paper name='Question List' sx={{width:'50%'}}>
+        <Paper name='Question List' sx={{maxWidth:'500px', minWidth:'500px'}}>
           <AppBar position="static" sx={{elevation:'0'}}>
             <Tabs
               value={this.state.value}

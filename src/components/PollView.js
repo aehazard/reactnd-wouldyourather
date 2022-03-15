@@ -27,21 +27,28 @@ function getQID (location) {
   return location.match(regex)[0]
 }
 
-function PollView(props) {
+class PollView extends Component {
+  state = {
 
-  console.log("PollView rendering")
-  const { authedUser,  questions, users } = props
-  const qid = getQID(props.location.pathname)
-  const question = questions[qid]
-  console.log(question)
-  const answered = ( question.optionOne.votes.includes(authedUser) || question.optionOne.votes.includes(authedUser) )
+  }
 
-  const author = users[question.author]
-  const propsToSend = { qid, question, authedUser, author }
-  if (answered) {
-    return(<ResultsMode {...propsToSend}/>)
-  } else {
-    return(<AnsweringMode {...propsToSend}/>)
+  componentDidMount () {
+
+  }
+
+  render(){
+    console.log("PollView rendering")
+    const { authedUser,  questions, users } = this.props
+    const qid = getQID(this.props.location.pathname)
+    const question = questions[qid]
+    const answered = ( question.optionOne.votes.includes(authedUser) || question.optionOne.votes.includes(authedUser) )
+    const author = users[question.author]
+    const propsToSend = { qid, question, authedUser, author }
+    if (answered) {
+      return(<ResultsMode {...propsToSend}/>)
+    } else {
+      return(<AnsweringMode {...propsToSend}/>)
+    }
   }
 }
 
