@@ -31,6 +31,7 @@ class ResultsMode extends Component {
   render(){
     const { qid, question, authedUser, author } = this.props
     console.log(`Show answered question, id: ${qid}`)
+    console.log(this.props)
     return (
         <Paper sx={{width: '50%', padding:2}}>
           <Box sx={{ width:'100%'}}>

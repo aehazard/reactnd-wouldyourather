@@ -55,7 +55,7 @@ class AnsweringMode extends Component {
   }
 
   render(){
-    const { qid, question, authedUser, author, handleSubmit } = this.props
+    const { qid, question, authedUser, author } = this.props
     console.log(`Show unanswered question, id: ${qid}`)
     return (
         <Paper sx={{width: '50%', padding:2}}>

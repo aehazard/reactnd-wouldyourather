@@ -28,22 +28,13 @@ function getQID (location) {
 }
 
 class PollView extends Component {
-  state = {
-
-  }
-
-  componentDidMount () {
-
-  }
 
   render(){
     console.log("PollView rendering")
-    const { authedUser,  questions, users } = this.props
-    const qid = getQID(this.props.location.pathname)
-    const question = questions[qid]
-    const answered = ( question.optionOne.votes.includes(authedUser) || question.optionOne.votes.includes(authedUser) )
-    const author = users[question.author]
-    const propsToSend = { qid, question, authedUser, author }
+    console.log(this.props)
+    const { authedUser, qid, question, answered, author } = this.props
+    const propsToSend = { qid, question, author, authedUser }
+
     if (answered) {
       return(<ResultsMode {...propsToSend}/>)
     } else {
@@ -52,8 +43,12 @@ class PollView extends Component {
   }
 }
 
-function mapStateToProps( {authedUser, questions, users} ){
-  return { authedUser,  questions, users };
+function mapStateToProps( {authedUser, questions, users}, props ){
+  const qid = getQID(props.location.pathname)
+  const question = questions[qid]
+  const author = users[question.author]
+  const answered = ( question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser) )
+  return { authedUser, qid, question, answered, author };
 }
 
 export default withRouter(connect(mapStateToProps)(PollView))
