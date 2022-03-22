@@ -33,8 +33,8 @@ class ResultsMode extends Component {
     console.log(`Show answered question, id: ${qid}`)
     console.log(this.props)
     return (
-        <Paper sx={{width: '50%', padding:2}}>
-          <Box sx={{ width:'100%'}}>
+        <Paper sx={{width: '50%', padding:2}} id="Results Paper!">
+          <Box sx={{ width:'100%'}} id="Results Box!">
             <Stack direction='row'>
               <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={author.name} src={author.avatarURL}/>
               <Box sx={{width:'auto', margin:2}}>

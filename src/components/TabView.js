@@ -40,7 +40,6 @@ class TabView extends Component {
       case 'questions': return <QuestionsView/>;
       case 'add': return <NewQuestion/>;
       case 'leaderboard': return <LeaderBoard/>;
-      case 'poll': return <PollView/>;
       default: return <QuestionsView/>
     }
   }
@@ -63,7 +62,7 @@ class TabView extends Component {
           </Tabs>
         </Box>
         <Container>
-          <Box>
+          <Box id="TabView Box!">
             {this.tabPanel(view)}
           </Box>
         </Container>

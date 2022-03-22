@@ -11,7 +11,7 @@ class QuestionsView extends Component {
     console.log("QuestionView rendering")
     return (
       <Router>
-        <Box sx={{display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{display: 'flex', justifyContent: 'center'}} id="QuestionView Box!">
           <Route path='/' exact render={() => <QuestionList />}/>
           <Route path='/questions' render={() => <PollView />}/>
         </Box>

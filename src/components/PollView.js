@@ -31,7 +31,6 @@ class PollView extends Component {
 
   render(){
     console.log("PollView rendering")
-    console.log(this.props)
     const { authedUser, qid, question, answered, author } = this.props
     const propsToSend = { qid, question, author, authedUser }
 

@@ -30,11 +30,11 @@ class TabNav extends Component {
     console.log("TabNav rendering")
     return (
       <Router>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%' }} id="TabNav Box!">
           <Route path='/' exact render={() => <TabView tabVisible={"questions"} view={"questions"}/>}/>
           <Route path='/leaderboard' render={() => <TabView tabVisible={"leaderboard"} view={"leaderboard"}/>}/>
           <Route path='/add' render={() => <TabView tabVisible={"add"} view={"add"}/>}/>
-          <Route path='/questions' render={() => <TabView tabVisible={"questions"} view={"poll"}/>}/>
+          <Route path='/questions' render={() => <TabView tabVisible={"questions"} view={"questions"}/>}/>
         </Box>
       </Router>
     )
