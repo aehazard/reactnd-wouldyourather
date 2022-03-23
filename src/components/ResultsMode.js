@@ -44,32 +44,30 @@ class ResultsMode extends Component {
     return (
         <Paper sx={{width: '50%', padding:2}} id="Results Paper!">
           <Box sx={{ width:'100%'}} id="Results Box!">
-            <Stack direction='column'>
+
               <Box sx={{width:'auto', margin:2}}>
                 <Typography variant="overline" color="text.secondary" component="span" display='block'>Results so far:</Typography>
                 <Divider sx={{marginBottom:2}}/>
-                <Stack direction="row" spacing={2}>
-                  <Stack direction="row">
-                    <Box sx={{width:'50%'}}>
-                      <Typography variant="h4" color="text.secondary" component="p">{optionOnePercent}</Typography>
-                      <Typography variant="body2" color="text.secondary" component="p">{optionOneVoteText}</Typography>
-                    </Box>
-                    <Box sx={{width:'50%'}}>
-                      <Typography variant="body2" color="text.secondary" component="p">{optionOneText}</Typography>
-                    </Box>
-                    <Box sx={{width:'50%'}}>
-                      <Typography variant="h4" color="text.secondary" component="p">{optionTwoPercent}</Typography>
-                      <Typography variant="body2" color="text.secondary" component="p">{optionTwoVoteText}</Typography>
-                    </Box>
-                    <Box sx={{width:'50%'}}>
-                      <Typography variant="body2" color="text.secondary" component="p">{optionTwoText}</Typography>
-                    </Box>
-                  </Stack>
+                <Stack direction="row" justifyContent="space-evenly">
+                  <Box sx={{width: "25%"}}>
+                    <Typography variant="h4" color="text.secondary" component="p">{optionOnePercent}</Typography>
+                    <Typography variant="body2" color="text.secondary" component="p">{optionOneVoteText}</Typography>
+                  </Box>
+                  <Box sx={{width: "25%"}}>
+                    <Typography variant="body2" color="text.secondary" component="p">{optionOneText}</Typography>
+                  </Box>
+                  <Box sx={{width: "25%"}}>
+                    <Typography variant="h4" color="text.secondary" component="p">{optionTwoPercent}</Typography>
+                    <Typography variant="body2" color="text.secondary" component="p">{optionTwoVoteText}</Typography>
+                  </Box>
+                  <Box sx={{width: "25%"}}>
+                    <Typography variant="body2" color="text.secondary" component="p">{optionTwoText}</Typography>
+                  </Box>
                 </Stack>
                 <Divider sx={{marginBottom:2, marginTop:2}}/>
                 <Typography variant="body2" color="text.secondary" component="p">*your selection</Typography>
               </Box>
-            </Stack>
+
           </Box>
           <Stack direction="row" spacing={2}  sx={{mt: '16px', display: 'flex', justifyContent: 'flex-end'}}>
             <Button variant='contained' size='small' onClick={this.handleCancel}>Back to Questions</Button>

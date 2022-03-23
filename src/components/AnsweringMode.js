@@ -46,7 +46,8 @@ class AnsweringMode extends Component {
       answer
     }))
 
-    this.props.history.push('/')
+    const newRoute = `/questions/:${qid}`
+    this.props.history.push(newRoute)
   }
 
   handleCancel = (event) => {
