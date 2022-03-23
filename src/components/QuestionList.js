@@ -29,15 +29,15 @@ class QuestionList extends Component {
   }
 
   filteredQuestions = (value) => {
-    const { questionIds, users, authedUser } = this.props
+    const { questionIds, users, authedUser, questions } = this.props
     const thisUserAnswers = Object.keys(users[authedUser].answers)
     if (value === 0) {
-      return questionIds.filter((id) => (
-        !thisUserAnswers.includes(id)
+      return Object.values(questions).filter((question) => (
+        !thisUserAnswers.includes(question.id)
       ))
     } else {
-      return questionIds.filter((id) => (
-        thisUserAnswers.includes(id)
+      return Object.values(questions).filter((question) => (
+        thisUserAnswers.includes(question.id)
       ))
     }
   }
@@ -74,10 +74,13 @@ class QuestionList extends Component {
           </AppBar>
           <Box sx={{padding:"2em"}}>
             <Stack spacing={2}>
-            {this.filteredQuestions(this.state.value).map((id) => (
+            {this.filteredQuestions(this.state.value)
+              .sort((a,b) => {
+                return b.timestamp - a.timestamp
+              }).map((question) => (
               <UserCard
-                key={id}
-                qid={id}
+                key={question.id}
+                qid={question.id}
               />
             ))}
             </Stack>

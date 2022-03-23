@@ -32,6 +32,7 @@ class TabView extends Component {
   };
 
   logout = () => {
+    this.props.history.push("/")
     this.props.dispatch(setAuthUser(null))
   }
 

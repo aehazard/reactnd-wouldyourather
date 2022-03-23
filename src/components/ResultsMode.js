@@ -30,21 +30,44 @@ class ResultsMode extends Component {
 
   render(){
     const { qid, question, authedUser, author } = this.props
+    const optionOneTotal = question.optionOne.votes.length
+    const optionTwoTotal = question.optionTwo.votes.length
+    const optionOnePercent = parseFloat((optionOneTotal / (optionOneTotal + optionTwoTotal))*100).toFixed(0)+'%'
+    const optionTwoPercent = parseFloat((optionTwoTotal / (optionOneTotal + optionTwoTotal))*100).toFixed(0)+'%'
+    const optionOneVoteText = optionOneTotal + ((optionOneTotal > 1) ? ' votes' : ' vote')
+    const optionTwoVoteText = optionTwoTotal + ((optionTwoTotal > 1) ? ' votes' : ' vote')
+    const optionOneText = question.optionOne.text + ((question.optionOne.votes.includes(authedUser)) ? '*' : '')
+    const optionTwoText = question.optionTwo.text + ((question.optionTwo.votes.includes(authedUser)) ? '*' : '')
+
     console.log(`Show answered question, id: ${qid}`)
     console.log(this.props)
     return (
         <Paper sx={{width: '50%', padding:2}} id="Results Paper!">
           <Box sx={{ width:'100%'}} id="Results Box!">
-            <Stack direction='row'>
-              <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={author.name} src={author.avatarURL}/>
+            <Stack direction='column'>
               <Box sx={{width:'auto', margin:2}}>
                 <Typography variant="overline" color="text.secondary" component="span" display='block'>Results so far:</Typography>
-                <Stack direction="row" spacing={2}  sx={{display: 'flex', justifyContent: 'space-around', width:'100%'}}>
-                  <Typography variant="h4" color="text.secondary" component="span">{question.optionOne.votes.length}</Typography>
-                  <Typography variant="body2" color="text.secondary" component="span">{question.optionOne.text}</Typography>
-                  <Typography variant="h4" color="text.secondary" component="span">{question.optionTwo.votes.length}</Typography>
-                  <Typography variant="body2" color="text.secondary" component="span">{question.optionTwo.text}</Typography>
+                <Divider sx={{marginBottom:2}}/>
+                <Stack direction="row" spacing={2}>
+                  <Stack direction="row">
+                    <Box sx={{width:'50%'}}>
+                      <Typography variant="h4" color="text.secondary" component="p">{optionOnePercent}</Typography>
+                      <Typography variant="body2" color="text.secondary" component="p">{optionOneVoteText}</Typography>
+                    </Box>
+                    <Box sx={{width:'50%'}}>
+                      <Typography variant="body2" color="text.secondary" component="p">{optionOneText}</Typography>
+                    </Box>
+                    <Box sx={{width:'50%'}}>
+                      <Typography variant="h4" color="text.secondary" component="p">{optionTwoPercent}</Typography>
+                      <Typography variant="body2" color="text.secondary" component="p">{optionTwoVoteText}</Typography>
+                    </Box>
+                    <Box sx={{width:'50%'}}>
+                      <Typography variant="body2" color="text.secondary" component="p">{optionTwoText}</Typography>
+                    </Box>
+                  </Stack>
                 </Stack>
+                <Divider sx={{marginBottom:2, marginTop:2}}/>
+                <Typography variant="body2" color="text.secondary" component="p">*your selection</Typography>
               </Box>
             </Stack>
           </Box>

@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function LeaderBoard(props) {
   console.log("LeaderBoard rendering")
-  
+
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -47,7 +47,10 @@ function LeaderBoard(props) {
         </AppBar>
         <Box sx={{padding:"2em"}}>
           <Stack spacing={2}>
-            {Object.values(props.users).map((user) => (
+            {Object.values(props.users)
+            .sort((a,b) => {
+              return b.total - a.total
+            }).map((user) => (
               <Item key={user.id}>
               <p>{user.name}</p>
               <p>Questions Asked: {user.asked} Questions Answered: {user.answered}</p>

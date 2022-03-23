@@ -21,6 +21,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
 import AnsweringMode from "./AnsweringMode"
 import ResultsMode from './ResultsMode'
+import FalseRoute from './FalseRoute'
 
 function getQID (location) {
   const regex = /(?<=:).*/
@@ -31,23 +32,32 @@ class PollView extends Component {
 
   render(){
     console.log("PollView rendering")
-    const { authedUser, qid, question, answered, author } = this.props
+    const { validRoute, authedUser, qid, question, answered, author } = this.props
     const propsToSend = { qid, question, author, authedUser }
-
-    if (answered) {
-      return(<ResultsMode {...propsToSend}/>)
+    if (validRoute) {
+      if (answered) {
+        return(<ResultsMode {...propsToSend}/>)
+      } else {
+        return(<AnsweringMode {...propsToSend}/>)
+      }
     } else {
-      return(<AnsweringMode {...propsToSend}/>)
+      return (<FalseRoute/>)
     }
   }
 }
 
 function mapStateToProps( {authedUser, questions, users}, props ){
   const qid = getQID(props.location.pathname)
-  const question = questions[qid]
-  const author = users[question.author]
-  const answered = ( question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser) )
-  return { authedUser, qid, question, answered, author };
+  const qids = Object.keys(questions)
+  const validRoute = qids.includes(qid)
+  if ( validRoute ) {
+    const question = questions[qid]
+    const author = users[question.author]
+    const answered = ( question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser) )
+    return { validRoute, authedUser, qid, question, answered, author }
+  } else {
+    return { validRoute }
+  }
 }
 
 export default withRouter(connect(mapStateToProps)(PollView))
