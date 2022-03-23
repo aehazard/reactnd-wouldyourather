@@ -2,16 +2,27 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import { deepOrange, deepPurple } from '@mui/material/colors';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import UserCard from './UserCard';
 import AppBar from '@mui/material/AppBar';
-import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import {
+  TextField,
+  Paper,
+  Button,
+  Box,
+  Stack,
+  Avatar,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Card,
+  CardContent,
+  Divider,
+  Typography
+} from '@mui/material';
 
 import { connect } from 'react-redux';
 
@@ -50,11 +61,23 @@ function LeaderBoard(props) {
             {Object.values(props.users)
             .sort((a,b) => {
               return b.total - a.total
-            }).map((user) => (
+            }).map((user, index) => (
               <Item key={user.id}>
-              <p>{user.name}</p>
-              <p>Questions Asked: {user.asked} Questions Answered: {user.answered}</p>
-              <p>TOTAL: {user.total}</p>
+              <Stack direction='row' alignItems="center">
+                <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={user.name} src={user.avatarURL}/>
+                <Divider orientation="vertical" flexItem />
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <Typography variant='h4' paragraph={true}>
+                    #{index+1}
+                  </Typography>
+                  <Typography variant='body1' paragraph={true}>
+                    {user.name}
+                  </Typography>
+                  <Typography variant='body1' paragraph={true}>
+                    Questions Asked: {user.asked} Questions Answered: {user.answered}
+                  </Typography>
+                </Box>
+              </Stack>
               </Item>
             ))}
           </Stack>
@@ -71,7 +94,8 @@ function mapStateToProps( {users} ){
       name: user.name,
       answered: Object.keys(user.answers).length,
       asked: user.questions.length,
-      total: Object.keys(user.answers).length + user.questions.length
+      total: Object.keys(user.answers).length + user.questions.length,
+      avatarURL: user.avatarURL
     })).sort((a, b) => (a.total > b.total) ? -1 : 1)
   }
 }
