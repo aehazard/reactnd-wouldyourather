@@ -1,24 +1,6 @@
 import React, { Component } from 'react'
-import {
-  TextField,
-  Paper,
-  Button,
-  Box,
-  Stack,
-  Avatar,
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Card,
-  CardContent,
-  Divider,
-  Typography
-} from '@mui/material';
-import { handleSubmitAnswer } from '../actions/questions'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import AnsweringMode from "./AnsweringMode"
 import ResultsMode from './ResultsMode'
 import FalseRoute from './FalseRoute'

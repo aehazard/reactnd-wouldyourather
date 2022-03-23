@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { TextField, Paper, Button, Box, Stack, Typography, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { connect } from 'react-redux'
 import { setAuthUser } from '../actions/authedUser'
+import {
+  Paper,
+  Button,
+  Box,
+  Stack,
+  Typography,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select
+} from '@mui/material';
 
 class LoginView extends Component {
   state = {

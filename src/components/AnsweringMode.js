@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  TextField,
   Paper,
   Button,
   Box,
@@ -10,15 +9,11 @@ import {
   RadioGroup,
   FormControl,
   FormControlLabel,
-  FormLabel,
-  Card,
-  CardContent,
-  Divider,
-  Typography
+  FormLabel
 } from '@mui/material';
 import { handleSubmitAnswer } from '../actions/shared'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 class AnsweringMode extends Component {
@@ -56,7 +51,7 @@ class AnsweringMode extends Component {
   }
 
   render(){
-    const { qid, question, authedUser, author } = this.props
+    const { qid, question, author } = this.props
     console.log(`Show unanswered question, id: ${qid}`)
     return (
         <Paper sx={{width: '50%', padding:2}}>

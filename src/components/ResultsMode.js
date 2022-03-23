@@ -1,25 +1,13 @@
 import React, { Component } from 'react'
 import {
-  TextField,
   Paper,
   Button,
   Box,
   Stack,
-  Avatar,
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Card,
-  CardContent,
   Divider,
   Typography
 } from '@mui/material';
-import { handleSubmitAnswer } from '../actions/questions'
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
-import AnsweringMode from "./AnsweringMode"
+import { withRouter } from 'react-router-dom'
 
 class ResultsMode extends Component {
 
@@ -29,7 +17,7 @@ class ResultsMode extends Component {
   }
 
   render(){
-    const { qid, question, authedUser, author } = this.props
+    const { qid, question, authedUser } = this.props
     const optionOneTotal = question.optionOne.votes.length
     const optionTwoTotal = question.optionTwo.votes.length
     const optionOnePercent = parseFloat((optionOneTotal / (optionOneTotal + optionTwoTotal))*100).toFixed(0)+'%'

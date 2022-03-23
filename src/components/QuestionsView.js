@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 import QuestionList from './QuestionList'
 import PollView from './PollView'
-import { connect } from 'react-redux'
 import { Box } from '@mui/material';
 
 

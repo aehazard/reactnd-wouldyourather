@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { deepOrange, deepPurple } from '@mui/material/colors';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import UserCard from './UserCard';
-import AppBar from '@mui/material/AppBar';
-import Paper from '@mui/material/Paper';
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
-
 import { connect } from 'react-redux';
+import UserCard from './UserCard';
+import { withRouter } from 'react-router-dom'
+import {
+  Tab,
+  Tabs,
+  Box,
+  Stack,
+  AppBar,
+  Paper
+} from '@mui/material';
 
 class QuestionList extends Component {
 
@@ -29,7 +25,7 @@ class QuestionList extends Component {
   }
 
   filteredQuestions = (value) => {
-    const { questionIds, users, authedUser, questions } = this.props
+    const { users, authedUser, questions } = this.props
     const thisUserAnswers = Object.keys(users[authedUser].answers)
     if (value === 0) {
       return Object.values(questions).filter((question) => (
@@ -51,7 +47,6 @@ class QuestionList extends Component {
   }
 
   render () {
-    const { questionIds, questions, users, authedUser } = this.props
     return (
         <Paper name='Question List' sx={{maxWidth:'500px', minWidth:'500px'}}>
           <AppBar position="static" sx={{elevation:'0'}}>

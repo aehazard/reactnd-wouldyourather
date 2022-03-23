@@ -1,25 +1,11 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import { deepOrange, deepPurple } from '@mui/material/colors';
-import UserCard from './UserCard';
-import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
 import {
-  TextField,
+  AppBar,
   Paper,
-  Button,
   Box,
   Stack,
   Avatar,
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Card,
-  CardContent,
   Divider,
   Typography
 } from '@mui/material';
@@ -36,19 +22,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function LeaderBoard(props) {
   console.log("LeaderBoard rendering")
-
-  const [value, setValue] = React.useState('1');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
 
   return (
     <Box sx={{display: 'flex', justifyContent: 'center'}}>

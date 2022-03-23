@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import { Stack } from '@mui/material'
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardActionArea,
+  Typography,
+  Avatar,
+  Divider,
+  Stack
+} from '@mui/material';
 
 
 class UserCard extends Component {
@@ -33,7 +29,7 @@ class UserCard extends Component {
   }
 
   render() {
-    const { authedUser, question, author, qid } = this.props
+    const { question, author, qid } = this.props
     console.log(`UserCard rendering for question id: ${qid}`)
     return (
       <Card sx={{ display: 'flex' }}>

@@ -1,27 +1,20 @@
-/* Developed from base at https://mui.com/components/tabs/ */
-
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, NavLink, withRouter, Redirect } from 'react-router-dom'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { deepOrange, deepPurple } from '@mui/material/colors';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-
-import UserCard from './UserCard';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { setAuthUser } from '../actions/authedUser'
 import QuestionsView from './QuestionsView';
 import NewQuestion from './NewQuestion';
-import PollView from './PollView';
 import LeaderBoard from './LeaderBoard';
-
-import { connect } from 'react-redux'
-import { setAuthUser } from '../actions/authedUser'
+import {
+  Tab,
+  Tabs,
+  Typography,
+  Box,
+  Button,
+  Avatar,
+  Container
+} from '@mui/material';
+import { deepPurple } from '@mui/material/colors';
 
 class TabView extends Component {
 
