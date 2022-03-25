@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { connect } from 'react-redux';
 import {
   AppBar,
   Paper,
@@ -9,9 +9,6 @@ import {
   Divider,
   Typography
 } from '@mui/material';
-
-import { connect } from 'react-redux';
-
 
 function LeaderBoard(props) {
   console.log("LeaderBoard rendering")

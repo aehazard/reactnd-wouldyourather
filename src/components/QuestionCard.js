@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 
-class UserCard extends Component {
+class QuestionCard extends Component {
 
   showPoll = (event, qid) => {
     event.preventDefault()
@@ -58,4 +58,4 @@ function mapStateToProps( {authedUser, questions, users}, {qid} ){
   return { authedUser,  question: questions[qid], author: users[questions[qid].author] };
 }
 
-export default withRouter(connect(mapStateToProps)(UserCard))
+export default withRouter(connect(mapStateToProps)(QuestionCard))

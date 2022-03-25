@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import TabNav from './TabNav'
-import LoginView from './LoginView'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import TabNav from './TabNav'
+import LoginView from './LoginView'
 
 class App extends Component {
   componentDidMount() {

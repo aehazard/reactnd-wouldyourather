@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserCard from './UserCard';
+import QuestionCard from './QuestionCard';
 import { withRouter } from 'react-router-dom'
 import {
   Tab,
@@ -68,7 +68,7 @@ class QuestionList extends Component {
               .sort((a,b) => {
                 return b.timestamp - a.timestamp
               }).map((question) => (
-              <UserCard
+              <QuestionCard
                 key={question.id}
                 qid={question.id}
               />

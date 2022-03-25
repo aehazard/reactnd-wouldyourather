@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { handleSubmitAnswer } from '../actions/shared'
 import {
   Paper,
   Button,
@@ -11,10 +14,6 @@ import {
   FormControlLabel,
   FormLabel
 } from '@mui/material';
-import { handleSubmitAnswer } from '../actions/shared'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-
 
 class AnsweringMode extends Component {
   state = {
