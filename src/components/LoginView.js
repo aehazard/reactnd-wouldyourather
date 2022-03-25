@@ -15,21 +15,21 @@ import {
 
 class LoginView extends Component {
   state = {
-    userId: null,
-    username: ''
+    selectedUserId: null,
+    selectedUsername: ''
   }
 
   handleChange = (event) => {
     console.log(event.target)
     this.setState(() => ({
-      userId: event.target.value,
-      username: event.target.value
+      selectedUserId: event.target.value,
+      selectedUsername: event.target.value
     }))
   };
 
   handleSubmit = () => {
-    this.props.dispatch(setAuthUser(this.state.userId))
-    console.log(`User set to ${this.state.userId}`)
+    this.props.dispatch(setAuthUser(this.state.selectedUserId))
+    console.log(`User set to ${this.state.selectedUserId}`)
   }
 
   render () {
@@ -47,7 +47,7 @@ class LoginView extends Component {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={this.state.username}
+              value={this.state.selectedUsername}
               label="User"
               onChange={this.handleChange}
             >{this.props.userIds.map((id) =>(
@@ -63,7 +63,6 @@ class LoginView extends Component {
               >
                 Submit
               </Button>
-            <Button variant='outlined' size='small'>Cancel</Button>
           </Stack>
         </Paper>
     </Box>

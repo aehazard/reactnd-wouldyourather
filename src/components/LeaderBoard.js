@@ -12,22 +12,15 @@ import {
 
 import { connect } from 'react-redux';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 function LeaderBoard(props) {
   console.log("LeaderBoard rendering")
 
   return (
     <Box sx={{display: 'flex', justifyContent: 'center'}}>
-      <Paper name='Question List' sx={{width:'50%'}}>
+      <Paper name='Leader Board' sx={{maxWidth:'500px', minWidth:'500px'}}>
         <AppBar position="static" sx={{elevation:'0', p:"12px 16px"}}>
-          <Typography>Current Leaders</Typography>
+          <Typography>CURRENT RANKINGS</Typography>
         </AppBar>
         <Box sx={{padding:"2em"}}>
           <Stack spacing={2}>
@@ -35,23 +28,23 @@ function LeaderBoard(props) {
             .sort((a,b) => {
               return b.total - a.total
             }).map((user, index) => (
-              <Item key={user.id}>
-              <Stack direction='row' alignItems="center">
+              <Paper key={user.id} sx={{textAlign: 'center', padding: 2}}>
+              <Stack direction='row' alignItems="center" justifyContent='space-evenly'>
                 <Avatar sx={{ width: 100, height: 100, margin: 2}} alt={user.name} src={user.avatarURL}/>
                 <Divider orientation="vertical" flexItem />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <Typography variant='h4' paragraph={true}>
-                    #{index+1}
-                  </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column'}}>
                   <Typography variant='body1' paragraph={true}>
-                    {user.name}
+                    #{index+1} {user.name}
                   </Typography>
-                  <Typography variant='body1' paragraph={true}>
-                    Questions Asked: {user.asked} Questions Answered: {user.answered}
+                  <Typography variant='body2' paragraph={true}>
+                    Questions Asked: {user.asked}
+                  </Typography>
+                  <Typography variant='body2' paragraph={true}>
+                    Questions Answered: {user.answered}
                   </Typography>
                 </Box>
               </Stack>
-              </Item>
+              </Paper>
             ))}
           </Stack>
         </Box>
